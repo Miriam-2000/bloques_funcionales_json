@@ -15,18 +15,18 @@ while target != "":
             conexiones.append(node)
             target = node["connectedTo"]["outputs"][0]
             data.remove(node)
-            print(mensajes[i]) 
+            print("PRIMER NODO ENCONTRADO: ",node["schemaId"]) 
             i +=1                
 
         if target == node["id"]:
             conexiones.append(node)
             if node["connectedTo"]["outputs"] != [] :
                 target = node["connectedTo"]["outputs"][0]
-                print("ENLAZADO CON: ", mensajes[i])
+                print("ENLAZADO CON: ", node["schemaId"])
                 i +=1 
             else:
                 target=""
-                print("Fin de ciclo.",mensajes[i])
+                print("ÚLTIMO NODO ENCONTRADO: ",node["schemaId"])
             
             data.remove(node)
 # print(conexiones)
