@@ -1,7 +1,15 @@
 import json
 from diagrams import Diagram, Cluster, Node
+import time
 
+#JAVIER: Inicio del ciclo
 
+def start_cycle():
+    
+    while True:
+        # Iniciar el ciclo de la cadena de montaje
+        print("Iniciando ciclo de la cadena de montaje...")
+'''
 class DiagramNode:
     """Representa un nodo en el flujograma
     """
@@ -67,3 +75,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    '''
