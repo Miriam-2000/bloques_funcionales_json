@@ -1,43 +1,32 @@
-import graphviz
 import json
 
 with open("example_backend.json", "r") as archivo_json:
     data = json.load(archivo_json)
 
-dot = graphviz.Digraph()
 
-# Añadir nodos
-""" for node in data:
-    dot.node(node["id"], label=node["schemaId"]) """
-
-# Añadir conexiones
 conexiones = []
+i = 0
+mensajes = ["Empiezo", "trigger", "cámara", "ia","conditional","conditional","plc_write","end_cycle"]
 target = ["paco"]
+while target != "":
+    for node in data:
+        # while target != []:
+        if node["connectedTo"]["inputs"] == []:
+            conexiones.append(node)
+            target = node["connectedTo"]["outputs"][0]
+            data.remove(node)
+            print(mensajes[i]) 
+            i +=1                
 
-for node in data:
-    # while target != []:
-    if node["connectedTo"]["inputs"] == []:
-        conexiones.append(node)
-        target = node["connectedTo"]["outputs"]
-        data.remove(node)
-        print("EMPIEZO. Siguiente: ", target)
-        node.clear()
-        continue
-
-    if target[0] == node["id"]:
-        conexiones.append(node)
-        target = node["connectedTo"]["outputs"]
-        print("TRIGGER LANZADO:", target)
-        node.clear()
-        continue
+        if target == node["id"]:
+            conexiones.append(node)
+            if node["connectedTo"]["outputs"] != [] :
+                target = node["connectedTo"]["outputs"][0]
+                print("ENLAZADO CON: ", mensajes[i])
+                i +=1 
+            else:
+                target=""
+                print("Fin de ciclo.",mensajes[i])
             
-    
-                
-    
-        
-                    # conexiones.append(target)
-
-# Renderizar el gráfico
-# dot.render('diagrama_de_bloques', format='png', cleanup=True)
-
-#print(conexiones)
+            data.remove(node)
+# print(conexiones)
