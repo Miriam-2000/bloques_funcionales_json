@@ -1,0 +1,242 @@
+[
+  {
+    "id": "3BG_W_oM8jCFpQtscQ0Xt",
+    "schemaId": "end-cycle-node",
+    "inputs": [
+      {
+        "inputId": "detections",
+        "type": "value",
+        "value": null
+      },
+      {
+        "inputId": "result",
+        "type": "value",
+        "value": null
+      }
+    ],
+    "outputs": [],
+    "nodeType": "regularNode",
+    "connectedTo": {
+      "inputs": [
+        "Ss9CgqtIwqW58MUr1tysV",
+        "VY9QRXXhi7Yea5TpqGZWq"
+      ],
+      "outputs": []
+    }
+  },
+  {
+    "id": "Atga1qDPmSS1r_Epb4a35",
+    "schemaId": "ai-node",
+    "inputs": [
+      {
+        "inputId": "model-name",
+        "type": "value",
+        "value": "model_rebabas"
+      },
+      {
+        "inputId": "model-image-name",
+        "type": "value",
+        "value": "imagen_1"
+      }
+    ],
+    "outputs": [
+      {
+        "outputId": "detections_name",
+        "type": "value",
+        "value": "detections"
+      }
+    ],
+    "nodeType": "regularNode",
+    "connectedTo": {
+      "inputs": [
+        "t_x2kjf3qr3HEyunfmojk"
+      ],
+      "outputs": [
+        "wgPE_kPIrHS07coRrG4We"
+      ]
+    }
+  },
+  {
+    "id": "O5z6WfU9iM5cG-slRQ-ZQ",
+    "schemaId": "conditional-if-node",
+    "inputs": [
+      {
+        "inputId": "condition",
+        "type": "complex",
+        "value": "rebaba.confidence<0.8"
+      }
+    ],
+    "outputs": [
+    {
+      "outputId": "true-path",
+      "type": "edge",
+      "targetNodes": ["Ss9CgqtIwqW58MUr1tysV"], 
+      "condition": "rebaba.confidence<0.8" 
+    },
+    {
+      "outputId": "false-path",
+      "type": "edge",
+      "targetNodes": ["VY9QRXXhi7Yea5TpqGZWq"],
+      "condition": "!"
+    }],
+    "nodeType": "regularNode",
+    "connectedTo": {
+      "inputs": [
+        "wgPE_kPIrHS07coRrG4We"
+      ],
+      "outputs": [
+        "Ss9CgqtIwqW58MUr1tysV",
+        "VY9QRXXhi7Yea5TpqGZWq"
+      ]
+    }
+  },
+  {
+    "id": "PF_xY880G40EmdUQVKv0N",
+    "schemaId": "start-cycle-node",
+    "inputs": [],
+    "outputs": [],
+    "nodeType": "regularNode",
+    "connectedTo": {
+      "inputs": [],
+      "outputs": [
+        "VxlHMvfnpBB2i5UFv9nar"
+      ]
+    }
+  },
+  {
+    "id": "Ss9CgqtIwqW58MUr1tysV",
+    "schemaId": "plc-write-node",
+    "inputs": [
+      {
+        "inputId": "plc",
+        "type": "value",
+        "value": null
+      },
+      {
+        "inputId": "signal",
+        "type": "value",
+        "value": null
+      }
+    ],
+    "outputs": [],
+    "nodeType": "regularNode",
+    "connectedTo": {
+      "inputs": [
+        "O5z6WfU9iM5cG-slRQ-ZQ"
+      ],
+      "outputs": [
+        "3BG_W_oM8jCFpQtscQ0Xt"
+      ]
+    }
+  },
+  {
+    "id": "t_x2kjf3qr3HEyunfmojk",
+    "schemaId": "camera-node",
+    "inputs": [
+      {
+        "inputId": "input-camera-name",
+        "type": "value",
+        "value": "camera_1"
+      }
+    ],
+    "outputs": [
+      {
+        "outputId": "output-camera-name",
+        "type": "value",
+        "value": "imagen_1"
+      }
+    ],
+    "nodeType": "regularNode",
+    "connectedTo": {
+      "inputs": [
+        "VxlHMvfnpBB2i5UFv9nar"
+      ],
+      "outputs": [
+        "Atga1qDPmSS1r_Epb4a35"
+      ]
+    }
+  },
+  {
+    "id": "VxlHMvfnpBB2i5UFv9nar",
+    "schemaId": "trigger-node",
+    "inputs": [
+      {
+        "inputId": "plc-type",
+        "type": "value",
+        "value": "plc"
+      }
+    ],
+    "outputs": [],
+    "nodeType": "regularNode",
+    "connectedTo": {
+      "inputs": [
+        "PF_xY880G40EmdUQVKv0N"
+      ],
+      "outputs": [
+        "t_x2kjf3qr3HEyunfmojk"
+      ]
+    }
+  },
+  {
+    "id": "VY9QRXXhi7Yea5TpqGZWq",
+    "schemaId": "plc-write-node",
+    "inputs": [
+      {
+        "inputId": "plc",
+        "type": "value",
+        "value": "plc_1"
+      },
+      {
+        "inputId": "signal",
+        "type": "value",
+        "value": 1
+      }
+    ],
+    "outputs": [],
+    "nodeType": "regularNode",
+    "connectedTo": {
+      "inputs": [
+        "O5z6WfU9iM5cG-slRQ-ZQ",
+        "wgPE_kPIrHS07coRrG4We"
+      ],
+      "outputs": [
+        "3BG_W_oM8jCFpQtscQ0Xt"
+      ]
+    }
+  },
+  {
+    "id": "wgPE_kPIrHS07coRrG4We",
+    "schemaId": "conditional-if-node",
+    "inputs": [
+      {
+        "inputId": "condition",
+        "type": "complex",
+        "value": "rebaba in {detections}"
+      }
+    ],
+    "outputs": [
+      {
+        "outputId": "true-path",
+        "type": "edge",
+        "targetNodes": ["O5z6WfU9iM5cG-slRQ-ZQ"], 
+        "condition": "rebaba in {detections}"
+      },
+      {
+        "outputId": "false-path",
+        "type": "edge",
+        "targetNodes": ["VY9QRXXhi7Yea5TpqGZWq"],
+        "condition": "!"
+      }
+    ],
+    "nodeType": "regularNode",
+    "connectedTo": {
+      "inputs": [
+        "Atga1qDPmSS1r_Epb4a35"
+      ],
+      "outputs": [
+        "O5z6WfU9iM5cG-slRQ-ZQ",
+        "VY9QRXXhi7Yea5TpqGZWq"
+      ]
+    }
+  }
+]
