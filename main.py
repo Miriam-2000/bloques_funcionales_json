@@ -15,25 +15,27 @@ while target != "":
             conexiones.append(node)
             target = node["connectedTo"]["outputs"][0]
             data.remove(node)
-            print("PRIMER NODO ENCONTRADO: ",node["schemaId"]) 
-            i += 1                
-                 
+            print("PRIMER NODO ENCONTRADO: ", node["schemaId"])
+            i += 1
+
         if target == node["id"]:
             conexiones.append(node)
 
             if node["schemaId"] == "conditional-if-node":
-                if condition == 1:
+                if condition == 1:  # True
                     target = node["connectedTo"]["outputs"][0]
-                else:
+                    print("ENLAZADO CON: ", node["schemaId"], "; RAMA: ", node["outputs"][0]["outputId"])
+                else:   # False
                     target = node["connectedTo"]["outputs"][1]
-            
-            if node["connectedTo"]["outputs"] != []:
+                    print("ENLAZADO CON: ", node["schemaId"], "; RAMA: ", node["outputs"][1]["outputId"])
+
+            elif node["connectedTo"]["outputs"] != []:
                 target = node["connectedTo"]["outputs"][0]
                 print("ENLAZADO CON: ", node["schemaId"])
-                i += 1 
+                i += 1
             else:
                 target = ""
-                print("ÚLTIMO NODO ENCONTRADO: ",node["schemaId"])
-            
+                print("ÚLTIMO NODO ENCONTRADO: ", node["schemaId"])
+
             data.remove(node)
 # print(conexiones)
