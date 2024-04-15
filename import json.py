@@ -14,10 +14,7 @@ def mostrar_nodos_plc_write(data):
             }
             nodos_plc_write.append(nodo_plc_write)
     return nodos_plc_write
-
-
-nodos_plc_write = mostrar_nodos_plc_write(data) 
-
+nodos_plc_write = mostrar_nodos_plc_write(data)
 
 # Mostrar los resultados
 for nodo in nodos_plc_write:
