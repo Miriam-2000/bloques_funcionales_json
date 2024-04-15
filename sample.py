@@ -1,7 +1,14 @@
 def conditional_if_node(condition, TruePath, FalsePath):
-   if condition:
+    print('Ejecutando bloque conditional_if')
+    if condition:
+       print('Condición True')
        return TruePath
-   else:
+    else:
+       print('Condición False')
        return FalsePath
 
-print(conditional_if_node(1 == 2, 73137917, 839080139))
+
+try:
+   conditional_if_node(rebaba.confidence<0.7, 1, 0)
+except NameError:
+    print('Una de las variables no existe')
