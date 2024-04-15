@@ -5,7 +5,7 @@ from diagrams import Diagram, Cluster, Node
 class DiagramNode:
     """Representa un nodo en el flujograma
     """
-    def __init__(self, id, schemaId, connectedTo):
+    def __init__(self, id, schemaId, connectedTo, inputs, outputs):
         """Inicializa un objetos DiagramNode que contiene los datos de un nodo
 
         Args:
@@ -16,10 +16,13 @@ class DiagramNode:
         self.id = id
         self.schemaId = schemaId
         self.connectedTo = connectedTo
+        self.inputs = inputs
+        self.outputs = outputs
+
 
 
 def cargar_datos(data):
-    """Genera una lista que contiene las instacias de cada objeto (nodo)
+    """Genera una lista que contiene las instancias de cada objeto (nodo)
 
     Args:
         data (List): Lista de diccionarios que contiene los datos
@@ -30,9 +33,12 @@ def cargar_datos(data):
     nodos = []
     for item in data:
         nodo = DiagramNode(item['id'],
-                           item['schemaId'],
-                           item.get('connectedTo', {'inputs': [],
-                                                    'outputs': []}))
+                        item['schemaId'],
+                        item.get('connectedTo', {'inputs': [], 'outputs': []}), 
+                        item['inputs'],
+                        item['outputs'])
+
+
         nodos.append(nodo)
     return nodos
 
@@ -55,15 +61,43 @@ def crear_diagrama(nodos):
                     if conexion in nodes:
                         nodes[nodo.id] >> nodes[conexion]
 
+def ia(input_id, nodos):
+    nodo_seleccionado = None
+    for nodo in nodos:
+        if nodo.id == input_id:
+            nodo_seleccionado = nodo
+            break
+
+    nodo_ia = None
+    for nodo in nodos:
+        if nodo.schemaId == "ai-node":
+            nodo_ia = nodo
+            break
+    if nodo_ia is not None:
+        print("Nombre del nodo ", nodo_ia.schemaId)
+        print("He accedido a la IA ", nodo_ia.id)
+    else:
+        print("No he podido acceder al nodo IA")
+
+    if nodo_seleccionado is not None:
+        print("Inputs del nodo", nodo_seleccionado.schemaId + ":")
+        for input_item in nodo_seleccionado.inputs:
+            print("inputId:", input_item['inputId'], " type:", input_item['type']," value:", input_item['value'])
+        print("Outputs del nodo", nodo_seleccionado.schemaId + ":")
+        for output_item in nodo_seleccionado.outputs:
+            print("outputId:", output_item['outputId']," type:", output_item['type']," value:", output_item['value'])
+    else:
+        print("No se encontró ningún nodo con el ID proporcionado.")
 
 def main():
-    ruta = "example_backend.json"
-    with open(ruta, "r") as file:
+    with open("example_backend.json", "r") as file:
         data = json.load(file)
+        nodos = cargar_datos(data)
+    return nodos
 
-    nodos = cargar_datos(data)
-    crear_diagrama(nodos)
+nodos = main()
+input_id = input("Ingrese el ID del nodo: ")
+ia(input_id, nodos)
 
 
-if __name__ == "__main__":
-    main()
+
