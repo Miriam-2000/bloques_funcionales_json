@@ -1,15 +1,47 @@
 import json
-from diagrams import Diagram, Cluster, Node
+#from diagrams import Diagram, Cluster, Node
 import time
+
 
 #JAVIER: Inicio del ciclo
 
 def start_cycle():
     
     while True:
-        # Iniciar el ciclo de la cadena de montaje
-        print("Iniciando ciclo de la cadena de montaje...")
+        print("Iniciando ciclo...")
+        # Simulación de detección de objeto en la cámara
+        objeto_detectado = False  # Cambia a True si se detecta un objeto en la cámara
+        
+        if objeto_detectado:
+            # Si se detecta un objeto...
+            print("Objeto detectado")
+            
+            # Simulación de proceso de fabricación
+            time.sleep(2)  # Simulación de proceso de fabricación
+            
+            # Simulación de finalización de ciclo
+            print("Fin de ciclo.")
+        else:
+            # Si no se detecta un objeto, volver a iniciar el ciclo
+            print("Ningún objeto detectado. Reiniciando ciclo...")
+            continue
+
+        # Esperar un tiempo antes de iniciar el siguiente ciclo
+        time.sleep(1)  # Esperar 1 segundo antes de iniciar el siguiente ciclo
+
+start_cycle()
+
+
 '''
+def start_cycle():
+    inicio_cadena = False    
+    while True:
+        if not inicio_cadena:
+            print("Iniciando ciclo...")
+            inicio_cadena = True
+#----------------------------------------            
+
+
 class DiagramNode:
     """Representa un nodo en el flujograma
     """
@@ -75,4 +107,5 @@ def main():
 
 if __name__ == "__main__":
     main()
-    '''
+
+'''
