@@ -13,5 +13,3 @@ def bloque_condicional_if(file, condition, TruePath, FalsePath):
     file.write(f"\nconditional_if_node({condition}, {TruePath}, {FalsePath})\n")
     file.close()
 
-
-bloque_condicional_if("Downloads/bloques_funcionales_json-2/sample.py", "1 == 2", "73137917", "839080139")
