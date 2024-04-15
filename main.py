@@ -9,7 +9,7 @@ for node in data:
         schema_id = node["schemaId"]
         inputs = node["inputs"]
         outputs = node["outputs"]
-        print("schemaId:", schema_id)
+        print("Nodo:", schema_id)
         print("Inputs:")
         for inp in inputs:
             print("\tInput Id:", inp["inputId"], "| Pertenece a:", node["schemaId"])
