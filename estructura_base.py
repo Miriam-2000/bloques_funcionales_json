@@ -56,6 +56,27 @@ def crear_diagrama(nodos):
                         nodes[nodo.id] >> nodes[conexion]
 
 
+
+def plc_read(inputId, type, value):
+    """elementos a sacar: 
+    inputs
+        inputId
+        type
+        value
+    outputs
+    """
+
+    nodos = []
+    for item in inputId, type, value:
+        nodo = item.get('inputs', {'inputId': [],
+                                     'type': [],
+                                     'value': []}),
+        item['outputs']
+        nodos.append(nodo)
+    return nodos
+
+
+
 def main():
     ruta = "example_backend.json"
     with open(ruta, "r") as file:
