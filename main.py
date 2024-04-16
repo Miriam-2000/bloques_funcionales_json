@@ -19,3 +19,4 @@ def bloque_condicional_if(file, condition, TruePath, FalsePath):
     file.write("    print('Una de las variables no existe')")
     file.close()
 
+bloque_condicional_if("Downloads/bloques_funcionales_json-2/sample.py", "1 == 1", 1, 0)

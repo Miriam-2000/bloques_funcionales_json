@@ -9,6 +9,6 @@ def conditional_if_node(condition, TruePath, FalsePath):
 
 
 try:
-   conditional_if_node(rebaba.confidence<0.7, 1, 0)
+   conditional_if_node(1 == 1, 1, 0)
 except NameError:
     print('Una de las variables no existe')
