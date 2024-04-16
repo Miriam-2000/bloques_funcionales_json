@@ -17,7 +17,7 @@ class block():
 
     def __str__(self):
         if self.name == "conditional-if-node":
-            return (f" Ejecutando Nodo: {self.name} [{self.id}]")
+            return (f"Ejecutando Nodo: {self.name} [{self.id}]")
         return (f"Ejecutando Nodo: {self.name} [{self.id}]")
 
     def ejecutar(self, funcion):
