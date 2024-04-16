@@ -56,25 +56,32 @@ def crear_diagrama(nodos):
                         nodes[nodo.id] >> nodes[conexion]
 
 
+def plc_read(data):
+    """Extracts and prints inputs and outputs from PLC nodes.
 
-def plc_read(inputId, type, value):
-    """elementos a sacar: 
-    inputs
-        inputId
-        type
-        value
-    outputs
+    Args:
+        data (list): List of dictionaries containing node data.
     """
-
-    nodos = []
-    for item in inputId, type, value:
-        nodo = item.get('inputs', {'inputId': [],
-                                     'type': [],
-                                     'value': []}),
-        item['outputs']
-        nodos.append(nodo)
-    return nodos
-
+    print("PLC Nodes Inputs and Outputs:")
+    for node in data:
+        if node['schemaId'] == 'plc-write-node':
+            inputs = node.get('inputs', [])
+            outputs = node.get('outputs', [])
+            print(f"Node ID: {node['id']}")
+            print("Inputs:")
+            for inp in inputs:
+                print(f"  Input ID: {inp['inputId']}")
+                print(f"  Type: {inp['type']}")
+                print(f"  Value: {inp['value']}")
+            if outputs:
+                print("Outputs:")
+                for out in outputs:
+                    print(f"  Output ID: {out['outputId']}")
+                    print(f"  Type: {out['type']}")
+                    print(f"  Value: {out['value']}")
+            else:
+                print("Outputs: None")
+            print()
 
 
 def main():
@@ -82,8 +89,7 @@ def main():
     with open(ruta, "r") as file:
         data = json.load(file)
 
-    nodos = cargar_datos(data)
-    crear_diagrama(nodos)
+    plc_read(data)
 
 
 if __name__ == "__main__":
